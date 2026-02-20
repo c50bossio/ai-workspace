@@ -1,66 +1,74 @@
 # HANDOFF.md - Current Task State
 
-**Last Updated:** 2026-02-20 01:13 EST
-**Active:** Tyler (6FB fixes) + Atlas (alerts integration)
+**Last Updated:** 2026-02-20 09:12 EST
+**Active:** Tyler (legacy table refactor) + Atlas (morning ad check)
 
 ---
 
 ## Current Focus
 
-Tyler: 6FB high priority fixes (expense sync, DB consolidation)
-Atlas: Wiring #alerts channel for automated notifications
+Tyler: Legacy table refactor PR #1 (remove redundant upsertKpi call)
+Atlas: Morning ad performance check + Discord alerts wiring
 
 ## In Progress
 
 **Tyler:**
-- Expenses syncing to cloud
-- Multiple SQLite connections → single shared
-- Legacy table cleanup (kpi_daily_user, appointments)
+- Legacy table refactor PR #1 (low risk, 1 call site)
 
 **Atlas:**
-- Discord #alerts channel integration
-- Dashboard → Discord alert posting
+- Morning ad check
+- Discord #alerts channel integration (waiting on webhook from Bossio)
 
-## Recently Completed (Tonight)
+## Overnight Session Summary (Feb 19-20)
 
-### Dashboard (bossio-solution-dashboard)
-- ✅ **PR #1** — 5 critical fixes (Pie ID, CRON auth, API auth, retry logic, cache keys)
-- ✅ **PR #2** — 5 high priority fixes (rate limiting, race condition, dead code, error handling, cron allowlist)
-- ✅ **DRY_RUN env var** — Fixed newline bug, ad automation now live
+### PRs Merged: 6 total
 
-### 6FB App (6fb-command-center)
-- ✅ **PR #2** — Dead code cleanup (291 files, 59K lines) + AI Coach caching
+**Dashboard (bossio-solution-dashboard): 2 PRs**
+- PR #1: 5 critical fixes (security, auth, retry logic)
+- PR #2: 5 high priority fixes (rate limiting, race conditions, dead code)
+- Plus: DRY_RUN env var fix (ad automation now live)
+- Plus: Discord alerts service added
 
-### Infrastructure
-- ✅ PRDs created for both projects
-- ✅ ads-manager skill built
-- ✅ Shared ai-workspace repo
-- ✅ COLLAB_PROTOCOL established (Tyler → Codex → Atlas → Merge)
-- ✅ #alerts Discord channel created
+**6FB App (6fb-command-center): 4 PRs**
+- PR #2: Dead code cleanup (291 files, 59K lines) + AI Coach caching
+- PR #3: Legacy table deprecation docs + expense sync verification
+- PR #4: Argon2id password hashing + TypeScript strictness
+- PR #5: Legend username fix + password reset email
 
-## Pending
+### Key Discoveries
 
-**Dashboard:**
-- [ ] Test framework setup (20 hrs)
-- [ ] Incomplete TODOs: budget pacing, history routes (8 hrs)
-- [ ] Amazon SP-API integration
+**PRD Known Issues were mostly ghosts:**
+- 7 of 13 issues were already fixed
+- Configurable work week: already built (CapacitySettingsScreen)
+- Expense sync: already working
+- Only 6 real issues remain
 
-**6FB:**
-- [ ] Redis-based AI Coach caching (replace in-memory)
-- [ ] Expense sync end-to-end testing
-- [ ] 64 TODOs in codebase
+### Infrastructure Created
+
+- ✅ ai-workspace shared repo
+- ✅ COLLAB_PROTOCOL (Tyler → Codex → Atlas → Merge)
+- ✅ #alerts Discord channel
+- ✅ ads-manager skill
+- ✅ PRDs for both projects
 
 ---
 
-## Tonight's Stats
+## Remaining Work
 
-| Metric | Value |
-|--------|-------|
-| PRs Merged | 3 |
-| Fixes Deployed | 17 |
-| Lines Removed | ~59,000 |
-| Critical Issues Fixed | 6 |
-| High Priority Fixed | 7 |
+**High Priority:**
+- [ ] Legacy table full refactor (6 call sites, ~4-6 hrs)
+- [ ] PaceMode blocked without pace-specific config
+- [ ] DB connections consolidation (8+ services)
+
+**Medium:**
+- [ ] Dashboard test framework (20 hrs)
+- [ ] Amazon SP-API integration
+- [ ] Wire Discord alerts to cron jobs (needs webhook)
+
+**Low:**
+- [ ] Confetti animation
+- [ ] Offline pace queue flush
+- [ ] AbortController on AI stream
 
 ---
 
