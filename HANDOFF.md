@@ -1,43 +1,66 @@
 # HANDOFF.md - Current Task State
 
-**Last Updated:** 2026-02-20 00:28 EST
-**Active:** Tyler (high priority fixes)
+**Last Updated:** 2026-02-20 01:13 EST
+**Active:** Tyler (6FB fixes) + Atlas (alerts integration)
 
 ---
 
 ## Current Focus
 
-Dashboard high priority fixes (batch 2)
+Tyler: 6FB high priority fixes (expense sync, DB consolidation)
+Atlas: Wiring #alerts channel for automated notifications
 
 ## In Progress
 
 **Tyler:**
-- Cron IP allowlist (1 hr)
-- Dead files cleanup (30 min)
-- Rate limiting on API routes (2 hrs)
-- .catch handlers throughout (4 hrs)
-- Race condition in campaign execution (2 hrs)
+- Expenses syncing to cloud
+- Multiple SQLite connections → single shared
+- Legacy table cleanup (kpi_daily_user, appointments)
+
+**Atlas:**
+- Discord #alerts channel integration
+- Dashboard → Discord alert posting
 
 ## Recently Completed (Tonight)
 
-- ✅ PRD for Dashboard + 6FB App
+### Dashboard (bossio-solution-dashboard)
+- ✅ **PR #1** — 5 critical fixes (Pie ID, CRON auth, API auth, retry logic, cache keys)
+- ✅ **PR #2** — 5 high priority fixes (rate limiting, race condition, dead code, error handling, cron allowlist)
+- ✅ **DRY_RUN env var** — Fixed newline bug, ad automation now live
+
+### 6FB App (6fb-command-center)
+- ✅ **PR #2** — Dead code cleanup (291 files, 59K lines) + AI Coach caching
+
+### Infrastructure
+- ✅ PRDs created for both projects
 - ✅ ads-manager skill built
-- ✅ Shared ai-workspace repo created
-- ✅ Dashboard audit (consolidated report)
-- ✅ **PR #1 merged** — 5 critical fixes (Tyler)
-- ✅ **DRY_RUN env var fix** — Ad automation now enabled (Atlas)
+- ✅ Shared ai-workspace repo
+- ✅ COLLAB_PROTOCOL established (Tyler → Codex → Atlas → Merge)
+- ✅ #alerts Discord channel created
 
 ## Pending
 
+**Dashboard:**
 - [ ] Test framework setup (20 hrs)
 - [ ] Incomplete TODOs: budget pacing, history routes (8 hrs)
-- [ ] 6FB app critical bugs (after dashboard stabilized)
+- [ ] Amazon SP-API integration
 
-## Notes
+**6FB:**
+- [ ] Redis-based AI Coach caching (replace in-memory)
+- [ ] Expense sync end-to-end testing
+- [ ] 64 TODOs in codebase
 
-**Dashboard status:** 6 critical fixes deployed. High priority in progress.
+---
 
-**Ad automation:** Now enabled in production. Next cron run will execute real actions.
+## Tonight's Stats
+
+| Metric | Value |
+|--------|-------|
+| PRs Merged | 3 |
+| Fixes Deployed | 17 |
+| Lines Removed | ~59,000 |
+| Critical Issues Fixed | 6 |
+| High Priority Fixed | 7 |
 
 ---
 
