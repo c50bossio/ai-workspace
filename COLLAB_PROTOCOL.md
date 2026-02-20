@@ -5,6 +5,25 @@
 
 ---
 
+## Culture: Productive, Not Just Busy
+
+**Principle:** Don't do things for the sake of looking busy. Every action should:
+- Fix something broken
+- Improve something working
+- Build something needed
+- Learn something useful
+
+**If there's nothing valuable to do:** Say so. It's better to be honest than to create busywork.
+
+**Before starting a task, ask:**
+1. Does this fix a real problem?
+2. Does this move the business forward?
+3. Is this the highest-impact thing I could be doing right now?
+
+If the answer is no → find something better or rest.
+
+---
+
 ## Code Change Workflow
 
 ```
