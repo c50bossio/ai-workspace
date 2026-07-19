@@ -1,102 +1,145 @@
-# HANDOFF.md — AI Workspace
-**Last Updated:** Feb 20, 2026 @ 4:22 PM EST  
-**Updated by:** Atlas
+# HANDOFF.md - Atlas ↔ Tyler
+
+## ✅ COMPLETE: Snowball Portal Fixes (Feb 23, 2026)
+
+**All critical fixes deployed and working.**
+
+### What Was Fixed
+
+| Issue | Fix | Status |
+|-------|-----|--------|
+| Completions not persisting | Migrated `/api/completions` from JSON file → PostgreSQL | ✅ Done |
+| Carryover API broken | Same file→DB migration | ✅ Done |
+| Messaging system dead | Replaced `clawdbot` CLI with Twilio SMS + Vercel cron | ✅ Done |
+| Debug routes exposed | Removed `/api/debug-clients` and `/api/migrate-mike` | ✅ Done |
+| Brand name outdated | Renamed clawdbot→OpenClaw in course content | ✅ Done |
+| No message visibility | Added admin Messages tab showing all sent SMS | ✅ Done |
+| No reply handling | Added Twilio webhook forwarding replies to Bossio's phone | ✅ Done |
+
+### SMS Schedule (Live Tomorrow)
+- **Mon 9 AM** — Weekly focus + top action item
+- **Wed 9 AM** — Mid-week check-in + portal link  
+- **Sun 10 AM** — Open items count (only if unchecked items exist)
+
+### Key Discovery
+Domain `snowball.6fbmentorship.com` pointed to `snowball-portal-public` project, not `snowball-portal`. Tyler fixed the deployment routing.
+
+### Still Lower Priority
+- Analytics tab (placeholder)
+- Bulk actions (placeholder)
+- 5 courses (Coming Soon placeholders)
 
 ---
 
-## 🚀 TEAM WORKFLOW (MANDATORY)
+## Latest: SSC Google Ads LIVE ✅ (Feb 22, 2026)
 
-```
-1. ATLAS (Opus) → STRATEGIZE
-   - Analyze the problem/request
-   - Plan the approach
-   - Break into actionable tasks
-   
-2. TYLER (Sonnet + Codex) → IMPLEMENT
-   - Write the code
-   - Make the changes
-   - Run tests/verification
-   
-3. ATLAS (Opus) → REVIEW & APPROVE
-   - Check the work
-   - Approve OR send back for revisions
-   - Merge/deploy when ready
-```
+**Atlas completed** — Created SSC Google Ads campaigns via REST API (SDK was unreliable).
 
-**No shortcuts. This is how we work.**
+| Campaign | ID | Budget |
+|----------|-----|--------|
+| SSC Brand Search | 23584520598 | $10/day |
+| SSC Local - Tampa | 23584523214 | $20/day |
+| SSC PMax (existing) | 23584307566 | $30/day |
+
+**Total SSC Google spend**: $60/day
+
+**Script**: `~/clawd/projects/bossio-solution-dashboard/scripts/create-ssc-campaigns-rest.ts`
+
+**Learning**: `google-ads-api` SDK doesn't pass `contains_eu_political_advertising` field correctly. Use REST API for campaign creation.
 
 ---
 
-## Current Status: SSC Website Redesign
+## Current Task: Products Tab for Dashboard
+**Assigned to:** Tyler
+**Priority:** HIGH
+**Status:** ASSIGNED Feb 27, 2026
 
-### Fresh Theme (Started Over)
-**Theme ID:** `159405900024`  
-**Preview:** https://0wfybq-b2.myshopify.com?preview_theme_id=159405900024
+### Context
+Shopify API is verified working (tested with Tomb45). We need a Products tab on the Dashboard showing inventory across all brands.
 
-| Change | Status | Details |
-|--------|--------|---------|
-| **Trust Bar** | ✅ Complete | Fast Shipping, 30-Day Returns, Quality Parts, Phone |
-| **FAQ Page** | ✅ Complete | 12 Q&As across 4 sections, accurate policies |
-| **Product Trust Strip** | ⏸️ Paused | Waiting on direction |
+### Task
+Build `/brands/[slug]/products` page that shows:
+- Product name, SKU, price
+- Inventory quantity (with low stock highlighting <10)
+- Product image thumbnail  
+- Sortable/filterable table
 
-**Approach:** One change at a time → Bossio verifies → Next change
+### Brands to Support
+| Brand | Store | Token in TOOLS.md |
+|-------|-------|-------------------|
+| Tomb45 | tomb-45.myshopify.com | ✅ |
+| FFC | floridasfinestcustom.myshopify.com | ✅ |
+| SSC | 0wfybq-b2.myshopify.com | ✅ |
+| UnkwnPro | unkwnpro.myshopify.com | ✅ |
 
----
+### Files to Create
+1. `src/app/(dashboard)/brands/[slug]/products/page.tsx` - Main page
+2. `src/app/api/shopify/products/route.ts` - API endpoint
+3. `src/lib/shopify.ts` - Shopify client helper
 
-## 6FB App Updates
+### Acceptance Criteria
+- [ ] Products page renders for each brand
+- [ ] Shows real Shopify data via API
+- [ ] Low stock items highlighted (<10 units)
+- [ ] TypeScript compiles with 0 errors
+- [ ] Responsive table layout
 
-**Benchmark Settings Bug** — ✅ Fixed & Pushed
-- Problem: Region/Experience selections weren't persisting
-- Fix: Added React Query cache invalidation after save
-- Commit: `d693bad3`
-- Needs: New TestFlight build for testers
-
----
-
-## Tyler's Current Tasks
-
-1. Check for other 6FB tester bugs
-2. Review FFC content package at `ffc-website-content/`
-3. Prep for FFC implementation when Bossio approves
-
----
-
-## FFC Website Content (Ready for Review)
-
-Location: `ai-workspace/ffc-website-content/`
-
-| File | Status |
-|------|--------|
-| FAQ_DRAFT.md | ✅ Ready — 30+ Q&As |
-| WHY_BUY_FROM_US.md | ✅ Ready — 3 copy options |
-| HERO_IMAGE_RECOMMENDATIONS.md | ✅ Ready |
-
-**Awaiting:** Bossio to confirm return policy, warranty, hours, select hero images
+### Branch
+`feature/products-tab`
 
 ---
 
-## Ad Management
+## Previous Task: Auto-Execution System
 
-**Paused Feb 20 (bleeding stopped: ~$891/month):**
-- FFC: "Rear Panels/video" ad ($295 spent, 0x ROAS)
-- Tomb45: "Product carousel" ad ($164 spent, 0x ROAS)  
-- SSC: Google Performance Max ($432 spent, 0.38x ROAS)
+### Context
+Dashboard currently shows AI recommendations but doesn't act on them. We need to add:
+1. One-click "Execute" buttons on recommendations
+2. Confirmation modal before executing
+3. API endpoint to actually pause/scale campaigns
+4. Enhanced executions page to show history
 
-**Feb 27:** Re-check paused campaigns
+### Spec Location
+`~/clawd/projects/ai-workspace/AUTO_EXECUTION_SPEC.md`
+
+### Files to Create/Modify
+1. `src/components/recommendations/RecommendationCard.tsx` - Add Execute button
+2. `src/components/recommendations/ExecuteModal.tsx` - Confirmation dialog
+3. `src/app/api/ads/execute/route.ts` - Execution endpoint
+4. `src/app/(dashboard)/brands/[slug]/executions/page.tsx` - Enhance with real-time status
+
+### Existing Code to Use
+- `src/lib/ad-automation/meta-ad-manager.ts` - Has `pauseCampaign()`, `scaleCampaign()`
+- `src/lib/ad-automation/google-ad-manager.ts` - Has `pauseCampaign()`
+- `src/lib/services/execution-tracker.ts` - Logs executions to DB
+
+### Key Constraints
+- Budget floor: $15/day minimum
+- Max change: 20% per execution
+- Cooldown: 72h between changes on same campaign
+- Headlines brand: NEVER auto-scale (manual only)
+- All executions must be logged to `AdExecution` table
+
+### Acceptance Criteria
+- [ ] Recommendation cards have "Execute" and "Dismiss" buttons
+- [ ] Clicking Execute shows confirmation modal with preview
+- [ ] Confirming actually pauses/scales via Meta/Google API
+- [ ] Execution logged to database
+- [ ] Success/failure toast notification shown
+- [ ] Executions page shows recent actions with status
+
+### Branch
+`feature/auto-execution`
 
 ---
 
-## Quick Links
+## Previous Completions (Feb 21, 2026)
 
-- **SSC Preview:** https://0wfybq-b2.myshopify.com?preview_theme_id=159405900024
-- **FFC Content:** `ai-workspace/ffc-website-content/`
-- **SSC Spec:** `ai-workspace/ssc-redesign/SSC_WEBSITE_REDESIGN_SPEC.md`
+### Sprint 4 Complete ✅
+- PR #21: Profit Calculator (621 lines)
+- PR #20: Smart Notifications Hub (803 lines)
+- PR #18: Intelligence Suite (962 lines)
+- PR #17: AI Insights (522 lines)
 
----
-
-## Contact Info (Verified)
-
-| Brand | Phone | Email |
-|-------|-------|-------|
-| SSC | (813) 327-2320 | sunshinestatetruckparts@gmail.com |
-| FFC | (689) 686-9751 | floridasfinestcustom@gmail.com |
+### Websites Live ✅
+- SSC: sunshinestatechromeandparts.com
+- FFC: floridasfinestcustomworks.com

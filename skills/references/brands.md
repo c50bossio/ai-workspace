@@ -242,8 +242,8 @@ if (brand === 'Headlines' && roas >= 3.5) {
 - **Average Monthly Spend:** ~$10K
 
 **Google Ads:**
-- **Customer ID:** `8590184784`
-- **Formatted:** `859-018-4784`
+- **Customer ID:** `7243512182`
+- **Formatted:** `724-351-2182`
 - **Via MCC:** `735-272-6472`
 - **Status:** ✅ Active
 
@@ -400,7 +400,7 @@ CPL: $100 ✅ (below $200 target)
 1. Tomb45 (813-799-2951)
 2. FFC (138-433-1870)
 3. Headlines (389-950-5299)
-4. Pie (859-018-4784)
+4. Pie (724-351-2182)
 5. SSC (521-236-7068) — **FIXED Feb 15, 2026**
 
 **Admin Access:** ✅ Full access to all accounts
@@ -493,7 +493,7 @@ Configured in `BrandAlertSettings` database table:
 | **Tomb45** | 319971796 | 813-799-2951 | $3,000 | None |
 | **FFC** | 2834312206725455 | 138-433-1870 | $2,000 | Inventory |
 | **Headlines** | 510699435029440 | 389-950-5299 | $500 | **NO AUTO-SCALE** |
-| **Pie** | 1273494507315603 | 859-018-4784 | $1,000 | None |
+| **Pie** | 1273494507315603 | 724-351-2182 | $1,000 | None |
 | **SSC** | — | 521-236-7068 | TBD | None |
 | **UNKWN Pro** | — | — | TBD | Not running ads |
 
